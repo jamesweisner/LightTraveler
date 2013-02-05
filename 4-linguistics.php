@@ -94,7 +94,7 @@ $lines = array(
 	'',
 	
 	// Set of all scalars.
-	'op = noun scalars set 5
+	'op = noun scalars set 6
 		noun def
 		noun undef
 		noun inf
