@@ -74,8 +74,8 @@ foreach(preg_split('/\s+/', trim(join(' break ', $message))) as $token)
 	
 	switch($mode)
 	{
-		case 0: echo str_pad(       $token,   16, ' ', STR_PAD_LEFT); break;
-		case 1: echo str_pad(       $symbol,  16, ' ', STR_PAD_LEFT); break;
+		case 0: echo $token; break;
+		case 1: echo $symbol; break;
 		case 2: echo str_pad(decbin($symbol), 16, '0', STR_PAD_LEFT); break;
 		case 3: echo str_pad(dechex($symbol),  4, '0', STR_PAD_LEFT); break;
 		case 4: echo pack('n', $symbol);                              break;
