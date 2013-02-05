@@ -88,7 +88,7 @@ $lines = array(
 		noun math_operators
 		noun bit_operators
 		noun set_operators
-		noun set 1 noun type_of
+		set 1 noun type_of
 	',
 	'op = op # noun operators bin 17',
 	'',
