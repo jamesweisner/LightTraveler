@@ -48,7 +48,7 @@ $symbols = array_flip(array(
 	'#', // Cardinality
 	'U', // Union
 	'I', // Intersection
-	'C', // Contains
+	'C', // Subset
 	
 	// Special operators.
 	'type_of',
@@ -123,31 +123,32 @@ $message = trim(join(' break ', array(
 	'',
 	
 	// Introduce addition.
-	'op = op + bin     1 bin 1 bin     2', //     1 + 1 = 2
-	'op = op + bin     1 bin 2 bin     3', //     1 + 2 = 3
-	'op = op + bin     1 bin 3 bin     4', //     1 + 3 = 4
-	'op = op + bin     1 bin 4 bin     5', //     1 + 4 = 5
-	'op = op + bin     1 bin 5 bin     6', //     1 + 5 = 6
-	'op = op + bin     1 bin 6 bin     7', //     1 + 6 = 7
-	'op = op + bin     1 bin 7 bin     8', //     1 + 7 = 8
-	'op = op + bin     1 bin 8 bin     9', //     1 + 8 = 9
-	'op = bin 2 op + bin 1 bin 1',         //     2 = 1 + 1 (= is transitive.)
-	'op = op + bin     2 bin 1 bin     3', //     2 + 1 = 3 (+ is transitive.)
-	'op = op + bin 32767 bin 1 bin 32768', // 32767 + 1 = 32768 (Carrying.)
+	'op = op + bin     1 bin 1 bin     2',  //     1 + 1 = 2
+	'op = op + bin     1 bin 2 bin     3',  //     1 + 2 = 3
+	'op = op + bin     1 bin 3 bin     4',  //     1 + 3 = 4
+	'op = op + bin     1 bin 4 bin     5',  //     1 + 4 = 5
+	'op = op + bin     1 bin 5 bin     6',  //     1 + 5 = 6
+	'op = op + bin     1 bin 6 bin     7',  //     1 + 6 = 7
+	'op = op + bin     1 bin 7 bin     8',  //     1 + 7 = 8
+	'op = op + bin     1 bin 8 bin     9',  //     1 + 8 = 9
+	'op = bin 2 op + bin 1 bin 1',          //     2 = 1 + 1 (= is transitive.)
+	'op = op + bin     2 bin 1 bin     3',  //     2 + 1 = 3 (+ is transitive.)
+	'op = op + bin 32767 bin 1 bin 32768',  // 32767 + 1 = 32768 (Carrying.)
+    'op = op + bin 65535 bin 1 scalar inf', // 65535 + 1 = infinity (Overflow.)
 	'',
-	// TODO handle overflow and underflow?
 	
 	// Introduce subtraction and negative numbers.
-	'op = op - bin     2 bin 1 bin     1', //     2 - 1 = 1
-	'op = op - bin     5 bin 3 bin     2', //     5 - 3 = 2
-	'op = op - bin     5 bin 2 bin     3', //     5 - 2 = 3 (- is intransitive.)
-	'op = op - bin 32768 bin 1 bin 32767', // 32768 - 1 = 32767 (Borrowing.)
-	'op = op - bin     0 bin 1 neg     1', //     0 - 1 = -1 (Negative numbers.)
-	'op = op - bin     1 bin 2 neg     1', //     1 - 2 = -1
-	'op = op - bin 1 bin 32768 neg 32767', // 1 - 32768 = -32767
-	'op = op + neg     1 neg 1 neg     2', //   -1 + -1 = -2 (Adding negative.)
-	'op = op - neg     1 bin 1 neg     2', //   -1 -  1 = -2 (Subtracting pos.)
-	'op = bin 0 neg 0',                    //        -0 = 0  (Negative zero.)
+	'op = op - bin     2 bin 1 bin     1',   //      2 - 1 = 1
+	'op = op - bin     5 bin 3 bin     2',   //      5 - 3 = 2
+	'op = op - bin     5 bin 2 bin     3',   //      5 - 2 = 3 (- is intransitive.)
+	'op = op - bin 32768 bin 1 bin 32767',   //  32768 - 1 = 32767 (Borrowing.)
+	'op = op - bin     0 bin 1 neg     1',   //      0 - 1 = -1 (Negative numbers.)
+	'op = op - bin     1 bin 2 neg     1',   //      1 - 2 = -1
+	'op = op - bin 1 bin 32768 neg 32767',   //  1 - 32768 = -32767
+	'op = op + neg     1 neg 1 neg     2',   //    -1 + -1 = -2 (Adding negative.)
+	'op = op - neg     1 bin 1 neg     2',   //    -1 -  1 = -2 (Subtracting pos.)
+	'op = bin 0 neg 0',                      //         -0 = 0  (Negative zero.)
+    'op = op - neg 65535 bin 1 scalar ninf', // -65535 - 1 = -infinity (Overflow.)
 	'',
 	
 	// Introduce multiplication and chained operations.
@@ -323,7 +324,7 @@ $message = trim(join(' break ', array(
 	'set 5 pulse 1 bin 2 neg 3 scalar inf set 0',      // Mixed types.
 	'',
 	
-	// Cardinality.
+	// Introduce set cardinality.
 	'op = op # set 0 bin 0',              // |{ }|        = 0 (Cardinality.)
 	'op = op # set 1 bin 1 bin 1',        // |{ 1 }|      = 1
 	'op = op # set 2 bin 1 bin 2 bin 2',  // |{ 1, 2 }|   = 2
@@ -332,19 +333,38 @@ $message = trim(join(' break ', array(
 	'op = op # set 1 set 0 bin 1',        // |{ {} }|     = 1 (Compound sets.)
 	'',
 	
-	// Union.
+	// Introduce union of sets.
 	'op = op U set 1 bin 1 set 1 bin 2 set 2 bin 1 bin 2', // {1}U{2} = {1,2}
 	'op = op U set 1 bin 2 set 1 bin 1 set 2 bin 1 bin 2', // {2}U{1} = {1,2}
 	'op = op U set 1 bin 1 set 1 bin 1 set 1 bin 1',       // {1}U{1} = {1}
 	'op = op U set 0 set 1 bin 1 set 1 bin 1',             // {}U{1}  = {1}
 	'',
 	
-	// Intersection.
-	// TODO
+	// Introduce intersection of sets.
+	'op = op I set 1 bin 1 set 1 bin 1 set 1 bin 1',       // {1}I{1}    = {1}
+	'op = op I set 1 bin 1 set 1 bin 2 set 0',             // {1}I{2}    = {}
+	'op = op I set 1 bin 2 set 1 bin 1 set 0',             // {2}I{1}    = {}
+	'op = op I set 2 bin 1 bin 2 set 1 bin 1 set 1 bin 1', // {1,2}I{1}  = {1}
+	'op = op I set 0 set 3 bin 1 bin 2 bin 3 set 0',       // {}I{1,2,3} = {}
+	'',
 	
-	// Contains.
-	// TODO
-	
+	// Introduce subset.
+	'op C set 1 bin 1             set 0',                   // {1}     C {}
+	'op C set 1 bin 1             set 1 bin 1',             // {1}     C {1}
+	'op C set 1 bin 1 bin 2       set 0',                   // {1,2}   C {}
+	'op C set 2 bin 1 bin 2       set 1 bin 1',             // {1,2}   C {1}
+	'op C set 2 bin 1 bin 2       set 1 bin 2',             // {1,2}   C {2}
+	'op C set 2 bin 1 bin 2       set 2 bin 1 bin 2',       // {1,2}   C {1,2}
+	'op C set 3 bin 1 bin 2 bin 3 set 0',                   // {1,2,3} C {}
+	'op C set 3 bin 1 bin 2 bin 3 set 1 bin 1',             // {1,2,3} C {1}
+	'op C set 3 bin 1 bin 2 bin 3 set 1 bin 2',             // {1,2,3} C {2}
+	'op C set 3 bin 1 bin 2 bin 3 set 1 bin 3',             // {1,2,3} C {3}
+	'op C set 3 bin 1 bin 2 bin 3 set 2 bin 1 bin 2',       // {1,2,3} C {1,2}
+	'op C set 3 bin 1 bin 2 bin 3 set 2 bin 1 bin 3',       // {1,2,3} C {1,3}
+	'op C set 3 bin 1 bin 2 bin 3 set 2 bin 2 bin 3',       // {1,2,3} C {2,3}
+	'op C set 3 bin 1 bin 2 bin 3 set 3 bin 1 bin 2 bin 3', // {1,2,3} C {1,2,3}
+	'',
+
 	// List all basic data types.
 	'noun pulse',
 	'noun bin',
@@ -380,7 +400,7 @@ $message = trim(join(' break ', array(
 		noun noun
 		noun var
 	',
-	'op C noun types noun pulse',
+	'op C noun types set 1 noun pulse',
 	'',
 	
 	// Define nouns for the types of operators.
@@ -496,6 +516,8 @@ $message = trim(join(' break ', array(
 		noun z
 	',
 	
+	// Operational dynamics.
+	// Calculus?
 	// Introduce checksum?
 	// Introduce chemical elements by atomic number.
 	// Organize elements in a periodic table struct?
