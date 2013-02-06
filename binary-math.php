@@ -54,6 +54,7 @@ $lines = array(
 	'op = op & bin 65535 bin 32768 bin 32768', // 1111111111111111 & X = X
 	'op = op & bin 32768 bin 32767 bin 0', // 1000000000000000 & 0111111111111111
 	'op = op & bin   255 bin 65280 bin 0', // 0000000011111111 & 1111111100000000
+	'op = op & neg     1 neg     1 neg 1', // -1 & -1 = -1
 	'',
 	
 	// Introduce bitwise OR.

@@ -16,7 +16,6 @@ $symbols = array(
 	'set_operators',   // Set of operators of this language that act on sets.
 	'operators',       // Set of all operators in the language.
 	'scalars',         // Set of special scalar values in the language.
-	'nouns',           // Set of all nouns in the language.
 	'symbols',         // Set of all of the symbols in the entire language!
 
 );

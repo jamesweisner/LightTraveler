@@ -7,7 +7,7 @@ $symbols = array(
 	'isotope', // Number of neutrons in a stable isotope
 	'orbital', // Number of electrons in an orbital.
 	
-	// Chemistry nouns.
+	// Chemistry sets.
 	'elements', // The periodic table of elements.
 
 );
@@ -15,9 +15,9 @@ $symbols = array(
 $lines = array(
 
 	// Introduce chemical elements by atomic number.
-	'op C noun nouns set 1 noun elements',
-	'op C noun types set 1 noun element',
-	'op C elements set 5
+	'op C noun symbols set 1 noun elements',
+	'op C noun types   set 1 noun element',
+	'op C elements set 4
 		element 1
 		element 2
 		element 3
