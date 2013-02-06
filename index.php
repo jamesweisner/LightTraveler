@@ -1,15 +1,20 @@
 <?php
 
 $modules = array(
-	'1-basic-math.php',
-	'2-set-theory.php',
-	'3-binary-math.php',
-	'4-linguistics.php',
-	'5-chemistry.php',
-	// TODO Operational dynamics.
-	// TODO Calculus?
-	// TODO Introduce checksum?
-	// TODO Music, images, etc.
+	'basic-math.php',
+	'set-theory.php',
+	'binary-math.php',
+	'linguistics.php',
+	'periodic-table.php',
+	'algebra.php',
+	'computation.php',
+	'trigonometry.php',
+	'physics.php',
+	'calculus.php',
+	'chemistry.php',
+	'images.php',
+	'music.php',
+	'biology.php',
 );
 
 // Array of lines in the message.

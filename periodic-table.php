@@ -37,6 +37,6 @@ $orbitals = compile_orbitals();
 include 'tools/isotopes.php';
 $isotopes = compile_isotopes();
 
-$lines = array_merge($lines, $orbitals, array(''), $isotopes, array(''));
+$lines = array_merge($lines, $orbitals, $isotopes);
 
 ?>

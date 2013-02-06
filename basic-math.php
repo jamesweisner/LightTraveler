@@ -35,11 +35,11 @@ $symbols = array(
 	'and',  // And
 	'or',   // Or
 	'not',  // Not
-	
-	);
-	
-	$lines = array(
-	
+
+);
+
+$lines = array(
+
 	// Introduce natural numbers by counting pulses.
 	'pulse     1', // 1
 	'pulse     3', // 2

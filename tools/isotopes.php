@@ -250,7 +250,9 @@ function compile_isotopes()
 		$set = 'isotope ' . implode(' isotope ', $isotopes);
 		$lines[] = "op C element $number set $size $set";
 	}
-
+	
+	$lines[] = ''; // End of section.
+	
 	return $lines;
 }
 

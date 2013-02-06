@@ -134,6 +134,8 @@ function compile_orbitals()
 		$lines[] = "op C element $number set $size $set";
 	}
 	
+	$lines[] = ''; // End of section.
+	
 	return $lines;
 }
 
