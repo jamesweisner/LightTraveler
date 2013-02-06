@@ -27,15 +27,16 @@ $lines = array(
 	// There are at least 98 chemical elements.
 	'op > op # elements bin 97',
 	'',
-	
-	// Introduce electron orbitals in each element.
-	'op C noun types set 1 orbital',
-	'op C element 1 set 1 orbital 1',
-	// TODO
-	
-	// Introduce isotopes of each chemical element.
-	'op C element 1 set 2 isotope 0 isotope 1',
-	'op C element 2 set 2 isotope 1 isotope 2',
-	// TODO
+);
 
-); ?>
+// Introduce electron orbitals for each element.
+include 'tools/orbitals.php';
+$orbitals = compile_orbitals();
+
+// Introduce stable isotopes of each chemical element.
+include 'tools/isotopes.php';
+$isotopes = compile_isotopes();
+
+$lines = array_merge($lines, $orbitals, array(''), $isotopes, array(''));
+
+?>
