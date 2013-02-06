@@ -168,6 +168,8 @@ $lines = array(
 	'op test op = bin 1 bin 2 scalar false', // (1 = 2) is false
 	'op test op > bin 2 bin 1 scalar true',  // (1 > 2) is true
 	'op test op < bin 2 bin 1 scalar false', // (1 < 2) is false
+	'op test op > bin 1 bin 1 scalar false', // (1 > 1) is false
+	'op test op < bin 1 bin 1 scalar false', // (1 < 1) is false
 	'op test scalar true  scalar true',      // (true)  is true
 	'op test scalar false scalar false',     // (false) is false
 	
