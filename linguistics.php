@@ -33,14 +33,14 @@ $lines = array(
 	'',
 	
 	// By example, introduce the operator to get the type of a thing.
-	'op = op type_of pulse      0 noun pulse',
-	'op = op type_of bin        0 noun bin',
-	'op = op type_of neg        0 noun neg',
-	'op = op type_of scalar   def noun scalar',
-	'op = op type_of set        0 noun set',
-	'op = op type_of op         = noun op',
-	'op = op type_of noun    noun noun noun', // Self-reference!
-	'op = op type_of noun    noun noun noun', // Very important!
+	'op = op type_of pulse   0 noun pulse',
+	'op = op type_of bin     0 noun bin',
+	'op = op type_of neg     0 noun neg',
+	'op = op type_of scalar  0 noun scalar',
+	'op = op type_of set     0 noun set',
+	'op = op type_of op      0 noun op',
+	'op = op type_of noun    0 noun noun', // Self-reference!
+	'op = op type_of noun    0 noun noun', // Very important!
 	'',
 	
 	// Define set of all data types, list those encountered so far.

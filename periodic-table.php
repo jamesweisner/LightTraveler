@@ -15,7 +15,7 @@ $symbols = array(
 $lines = array(
 
 	// Introduce chemical elements by atomic number.
-	'op C noun nouns set 1 elements',
+	'op C noun nouns set 1 noun elements',
 	'op C noun types set 1 noun element',
 	'op C elements set 5
 		element 1
