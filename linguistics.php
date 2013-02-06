@@ -60,7 +60,8 @@ $lines = array(
 	'',
 	
 	// Define nouns for the types of operators.
-	'op = noun math_operators set 7
+	'op = noun math_operators set 8
+		noun =
 		noun +
 		noun -
 		noun *
