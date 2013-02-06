@@ -45,6 +45,9 @@ foreach($modules as $module)
 // Format symbol lookup table by assigning values to the global symbols.
 $symbols = array_flip($globals);
 
+// Will look for unused symbols.
+$globals = $symbols;
+
 // Modes:
 //   0 Original symbols.
 //   1 Decimal values.
@@ -70,6 +73,7 @@ foreach(preg_split('/\s+/', trim(join(' break ', $message))) as $token)
 	}
 	
 	// Encode symbols.
+	unset($globals[$token]);
 	if(is_numeric($token))
 		$symbol = (int) $token;
 	else if(isset($symbols[$token]))
@@ -88,3 +92,5 @@ foreach(preg_split('/\s+/', trim(join(' break ', $message))) as $token)
 	
 	if($mode < 3) echo ' ';
 }
+
+if($globals) echo "Unused symbols: " . implode(', ', array_keys($globals)) . "\n";

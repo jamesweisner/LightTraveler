@@ -13,12 +13,10 @@ $symbols = array(
 	'math_operators',  // Set of math operators of this language.
 	'bit_operators',   // Set of bitwise operators of this language.
 	'set_operators',   // Set of operators of this language that act on sets.
-	'other_operators', // Set of special operators in the language.
 	'operators',       // Set of all operators in the language.
 	'scalars',         // Set of special scalar values in the language.
 	'nouns',           // Set of all nouns in the language.
 	'symbols',         // Set of all of the symbols in the entire language!
-	'scalar_types',    // Set of data types used in math and logic functions.
 
 );
 
@@ -45,9 +43,9 @@ $lines = array(
 	'op = op type_of noun    noun noun noun', // Very important!
 	'',
 	
-	// Define a noun using a set.
-	// Show that set operators can be applied to nouns that are sets.
-	'op = noun types set 8
+	// Define set of all data types, list those encountered so far.
+	// Hint at more to come.
+	'op C noun types set 8
 		noun pulse
 		noun bin
 		noun neg
@@ -56,10 +54,10 @@ $lines = array(
 		noun set
 		noun noun
 	',
-	'op C noun types set 1 noun pulse',
+	'op > op # types bin 8',
 	'',
 	
-	// Define nouns for the types of operators.
+	// Define the different types of operators.
 	'op = noun math_operators set 8
 		noun =
 		noun +
@@ -83,18 +81,18 @@ $lines = array(
 	',
 	'',
 	
-	// Set of all operators.
-	// Hint at cardinality of this large set.
-	'op = noun operators op U op U op U
+	// Define set of all operators, list those encountered so far.
+	// Hint at more to come.
+	'op C noun operators op U op U op U
 		noun math_operators
 		noun bit_operators
 		noun set_operators
 		set 1 noun type_of
 	',
-	'op = op # noun operators bin 17',
+	'op > op # noun operators bin 16',
 	'',
 	
-	// Set of all scalars.
+	// Define the set of all scalars.
 	'op = noun scalars set 6
 		noun def
 		noun undef
@@ -103,29 +101,22 @@ $lines = array(
 		noun true
 		noun false
 	',
+	'',
 	
-	// Set of all nouns, partially defined here.
+	// Define set of all the symbols in the language!
 	// Self as member of a set!
-	'op C noun nouns set 6
-		noun pulse
-		noun noun
-		noun type_of
-		noun math_operators
-		noun operators
-		noun nouns
-		noun symbols
-	',
-	'op C nouns set 1 noun nouns',
-	
-	// All the symbols in the language!
-	// Self as member of a set.
-	'op C noun symbols op U op U op U op U
+	'op C noun symbols op U op U op U
 		noun types
 		noun operators
 		noun scalars
-		noun nouns
+		set 1 noun symbols
 	',
 	'op C noun symbols set 1 noun symbols',
+	'op C noun symbols set 1 noun symbols',
+	'',
+
+	// There can be no more than 65535 symbols in this language.
+	'op < op # symbols bin 65535',
 	'',
 
 ); ?>
