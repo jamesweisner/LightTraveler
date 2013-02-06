@@ -11,6 +11,7 @@ $symbols = array(
 	// Parts of the language.
 	'types',           // Set of basic types of this language.
 	'math_operators',  // Set of math operators of this language.
+	'bool_operators',  // Set of boolean operators of the language.
 	'bit_operators',   // Set of bitwise operators of this language.
 	'set_operators',   // Set of operators of this language that act on sets.
 	'operators',       // Set of all operators in the language.
@@ -68,7 +69,13 @@ $lines = array(
 		noun <
 		noun >
 	',
-	'op = noun bit_operators set 4
+	'op = noun bool_operators set 4
+		noun test
+		noun and
+		noun or
+		noun not
+	',
+	'op = noun bit_operators set 3
 		noun !
 		noun &
 		noun |
@@ -83,13 +90,14 @@ $lines = array(
 	
 	// Define set of all operators, list those encountered so far.
 	// Hint at more to come.
-	'op C noun operators op U op U op U
+	'op C noun operators op U op U op U op U
 		noun math_operators
+		noun bool_operators
 		noun bit_operators
 		noun set_operators
 		set 1 noun type_of
 	',
-	'op > op # noun operators bin 16',
+	'op > op # noun operators bin 20',
 	'',
 	
 	// Define the set of all scalars.
