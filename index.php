@@ -56,8 +56,20 @@ $globals = $symbols;
 //   4 Binary file.
 $mode = isset($_GET['mode']) ? (int) $_GET['mode'] : 2;
 
-if($mode == 4) header('Content-disposition: attachment; filename="message.dat"');
-else           header('Content-type: text/plain');
+switch($mode)
+{
+	case 4:
+		header('Content-disposition: attachment; filename="message.dat"');
+		break;
+	case 5:
+		header('Content-type: image/png');
+		include 'tools/image.php';
+		image_init();
+		break;
+	default:
+		header('Content-type: text/plain');
+		break;
+}
 
 foreach(preg_split('/\s+/', trim(join(' break ', $message))) as $token)
 {
@@ -67,6 +79,7 @@ foreach(preg_split('/\s+/', trim(join(' break ', $message))) as $token)
 		{
 			case 3:  echo            "ffffffff"; break;
 			case 4:  echo pack('N', 0xFFFFFFFF); break;
+			case 5:  image_break();              break;
 			default: echo "\n";                  break;
 		}
 		continue;
@@ -83,14 +96,17 @@ foreach(preg_split('/\s+/', trim(join(' break ', $message))) as $token)
 	
 	switch($mode)
 	{
-		case 0: echo $token; break;
-		case 1: echo $symbol; break;
+		case 0: echo $token;                                          break;
+		case 1: echo $symbol;                                         break;
 		case 2: echo str_pad(decbin($symbol), 16, '0', STR_PAD_LEFT); break;
 		case 3: echo str_pad(dechex($symbol),  4, '0', STR_PAD_LEFT); break;
 		case 4: echo pack('n', $symbol);                              break;
+		case 5: image_symbol($symbol);                                break;
 	}
 	
 	if($mode < 3) echo ' ';
 }
 
 if($globals) echo "Unused symbols: " . implode(', ', array_keys($globals)) . "\n";
+
+if($mode == 5) imagepng($image);
