@@ -100,13 +100,14 @@ $lines = array(
 	'',
 	
 	// Define the set of all scalars.
-	'op = noun scalars set 6
+	'op = noun scalars set 7
 		noun def
 		noun undef
 		noun inf
 		noun ninf
 		noun true
 		noun false
+		noun i
 	',
 	'',
 	

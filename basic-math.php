@@ -19,6 +19,7 @@ $symbols = array(
 	'ninf',  // -Infinity
 	'true',  // True
 	'false', // False
+	'i',     // Imaginary
 	
 	// Math operators.
 	'=', // Equals
@@ -29,6 +30,7 @@ $symbols = array(
 	'%', // Modulo
 	'>', // Greater than
 	'<', // Less than
+	'^', // Power
 	
 	// Logical operators.
 	'test', // Test for truth
@@ -92,21 +94,19 @@ $lines = array(
 	'op = bin 2 op + bin 1 bin 1',          //     2 = 1 + 1 (= is transitive.)
 	'op = op + bin     2 bin 1 bin     3',  //     2 + 1 = 3 (+ is transitive.)
 	'op = op + bin 32767 bin 1 bin 32768',  // 32767 + 1 = 32768 (Carrying.)
-	'op = op + bin 65535 bin 1 scalar inf', // 65535 + 1 = infinity (Overflow.)
 	'',
 	
 	// Introduce subtraction and negative numbers.
-	'op = op - bin     2 bin 1 bin     1',   //      2 - 1 = 1
-	'op = op - bin     5 bin 3 bin     2',   //      5 - 3 = 2
-	'op = op - bin     5 bin 2 bin     3',   //      5 - 2 = 3 (- is intransitive.)
-	'op = op - bin 32768 bin 1 bin 32767',   //  32768 - 1 = 32767 (Borrowing.)
-	'op = op - bin     0 bin 1 neg     1',   //      0 - 1 = -1 (Negative numbers.)
-	'op = op - bin     1 bin 2 neg     1',   //      1 - 2 = -1
-	'op = op - bin 1 bin 32768 neg 32767',   //  1 - 32768 = -32767
-	'op = op + neg     1 neg 1 neg     2',   //    -1 + -1 = -2 (Adding negative.)
-	'op = op - neg     1 bin 1 neg     2',   //    -1 -  1 = -2 (Subtracting pos.)
-	'op = bin 0 neg 0',                      //         -0 = 0  (Negative zero.)
-	'op = op - neg 65535 bin 1 scalar ninf', // -65535 - 1 = -infinity (Overflow.)
+	'op = op - bin     2 bin 1 bin     1',   //     2 - 1 = 1
+	'op = op - bin     5 bin 3 bin     2',   //     5 - 3 = 2
+	'op = op - bin     5 bin 2 bin     3',   //     5 - 2 = 3 (- is intransitive.)
+	'op = op - bin 32768 bin 1 bin 32767',   // 32768 - 1 = 32767 (Borrowing.)
+	'op = op - bin     0 bin 1 neg     1',   //     0 - 1 = -1 (Negative numbers.)
+	'op = op - bin     1 bin 2 neg     1',   //     1 - 2 = -1
+	'op = op - bin 1 bin 32768 neg 32767',   // 1 - 32768 = -32767
+	'op = op + neg     1 neg 1 neg     2',   //   -1 + -1 = -2 (Adding negative.)
+	'op = op - neg     1 bin 1 neg     2',   //   -1 -  1 = -2 (Subtracting pos.)
+	'op = bin 0 neg 0',                      //        -0 = 0  (Negative zero.)
 	'',
 	
 	// Introduce multiplication and chained operations.
@@ -196,5 +196,25 @@ $lines = array(
 	'op test not scalar undef scalar def',   // (not undef) is defined! holy shit!
 	'op test not scalar undef scalar def',   // Pay attention to this! Mind blown?
 	'',
+	
+	// Introduce exponents.
+	'op = op ^ bin 2 bin  0 bin 1',         // 2^0  = 1
+	'op = op ^ bin 2 bin  1 bin 2',         // 2^1  = 2
+	'op = op ^ bin 2 bin  2 bin 4',         // 2^2  = 4
+	'op = op ^ bin 2 bin  3 bin 8',         // 2^3  = 8
+	'op = op ^ bin 1 bin  3 bin 1',         // 1^3  = 1
+	'op = op ^ bin 3 bin  3 bin 27',        // 3^3  = 27
+	'op = op ^ bin 2 bin 15 bin 32768',     // 2^15 = 32768
+	'op = op ^ bin 0 bin  7 bin 0',         // 0^7  = 0
+	'op = op ^ bin 0 bin  0 bin 1',         // 0^0  = 1
+	'op < op ^ 65535 bin 65535 scalar inf', // 65535^65535 < inf
+
+	// Introduce complex numbers.
+	'op = op ^ bin 4 op / bin 1 bin 2 bin 2',    // 4^(1/2) = sqrt(4) = 2
+	'op = op ^ bin 5 neg 2 op / bin 2 bin 25',   // 5^-2 = 1 / 25
+	'op = op ^ neg 1 bin 2 bin 1',               // (-1)^2 =  1
+	'op = op ^ neg 1 bin 3 neg 1',               // (-1)^3 = -1
+	'op = op ^ neg 1 op / bin 1 bin 2 scalar i', // sqrt(-1) = i
+	'op = op * scalar i scalar i neg 1',         // i^2 = -1
 
 ); ?>
