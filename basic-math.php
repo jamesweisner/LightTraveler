@@ -75,6 +75,13 @@ $lines = array(
 	'op = pulse    63 bin     6', //  6 pulses = 6
 	'op = pulse   127 bin     7', //  7 pulses = 7
 	'op = pulse   255 bin     8', //  8 pulses = 8
+	'op = pulse   511 bin     9', //  9 pulses = 9
+	'op = pulse  1023 bin    10', // 10 pulses = 10
+	'op = pulse  2047 bin    11', // 11 pulses = 11
+	'op = pulse  4095 bin    12', // 12 pulses = 12
+	'op = pulse  8191 bin    13', // 13 pulses = 13
+	'op = pulse 16383 bin    14', // 14 pulses = 14
+	'op = pulse 32767 bin    15', // 15 pulses = 15
 	'op = pulse 65535 bin    16', // 16 pulses = 16
 	'op = pulse     1 pulse   1', //  1 pulse  = 1 pulse (Same type equality.)
 	'op = bin      17 bin    17', //        17 = 17      (New binary number.)
@@ -82,18 +89,18 @@ $lines = array(
 	'op = pulse     0 bin     0', //  0 pulses = 0       (Concept of zero.)
 	'',
 	
-	// Introduce addition.
-	'op = op + bin     1 bin 1 bin     2',  //     1 + 1 = 2
-	'op = op + bin     1 bin 2 bin     3',  //     1 + 2 = 3
-	'op = op + bin     1 bin 3 bin     4',  //     1 + 3 = 4
-	'op = op + bin     1 bin 4 bin     5',  //     1 + 4 = 5
-	'op = op + bin     1 bin 5 bin     6',  //     1 + 5 = 6
-	'op = op + bin     1 bin 6 bin     7',  //     1 + 6 = 7
-	'op = op + bin     1 bin 7 bin     8',  //     1 + 7 = 8
-	'op = op + bin     1 bin 8 bin     9',  //     1 + 8 = 9
-	'op = bin 2 op + bin 1 bin 1',          //     2 = 1 + 1 (= is transitive.)
-	'op = op + bin     2 bin 1 bin     3',  //     2 + 1 = 3 (+ is transitive.)
-	'op = op + bin 32767 bin 1 bin 32768',  // 32767 + 1 = 32768 (Carrying.)
+	// Introduce addition using the Fibonacci sequence.
+	'op = op + bin     1 bin  1 bin     2',  //     1 +  1 = 2
+	'op = op + bin     1 bin  2 bin     3',  //     1 +  2 = 3
+	'op = op + bin     2 bin  3 bin     5',  //     2 +  3 = 5
+	'op = op + bin     3 bin  5 bin     8',  //     3 +  5 = 8
+	'op = op + bin     5 bin  8 bin    13',  //     5 +  8 = 13
+	'op = op + bin     8 bin 13 bin    21',  //     8 + 13 = 21
+	'op = op + bin    13 bin 21 bin    34',  //    13 + 21 = 34
+	'op = op + bin    21 bin 34 bin    55',  //    21 + 34 = 55
+	'op = bin 2 op + bin 1 bin 1',           //     2 =  1 + 1 (= is transitive.)
+	'op = op + bin     2 bin  1 bin     3',  //     2 +  1 = 3 (+ is transitive.)
+	'op = op + bin 32767 bin  1 bin 32768',  // 32767 +  1 = 32768 (Carrying.)
 	'',
 	
 	// Introduce subtraction and negative numbers.
