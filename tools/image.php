@@ -3,7 +3,7 @@
 function image_init()
 {
 	global $image, $white, $black, $empty, $count;
-	$image = imagecreatetruecolor(1024, 6 * 32);
+	$image = imagecreatetruecolor(1024, 8 * 32);
 	$white = imagecolorallocate($image, 255, 255, 255);
 	$black = imagecolorallocate($image,   0,   0,   0);
 	$empty = imagecolorallocate($image, 128, 128, 128);
