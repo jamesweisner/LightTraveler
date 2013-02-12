@@ -1,11 +1,13 @@
 <?php
 
+require_once 'tools/math.php';
+
 // Lsit of the average lifetime of several radioactive isotopes.
 // http://en.wikipedia.org/wiki/List_of_nuclides
 // http://en.wikipedia.org/wiki/List_of_elements
 function compile_lifetimes()
 {
-	$planck_time = 5.391e-44;
+	$planck_time = 5.391e-44; // Seconds.
 
 	$elements = array(
 		'H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al',
@@ -68,23 +70,12 @@ function compile_lifetimes()
 			die("Failed to look up element symbol [$symbol]!\n");
 		$element = array_search($symbol, $elements) + 1;
 		$isotope = $nucleons - $element;
-		$lines[] = "op lifetime_of element $element isotope $isotope $value";
+		$lines[] = "op = op lifetime_of element $element isotope $isotope $value";
 	}
 	
 	$lines[] = ''; // End of section.
 	
 	return $lines;
-}
-
-function scientific_notation($number)
-{
-	$power = 0;
-	while($number > 65535)  { $number /= 2; $power++; }
-	while($number < 32768)  { $number *= 2; $power--; } $number = round($number);
-	while($number % 2 == 0) { $number /= 2; $power++; }
-	$mantissa = ($number < 0 ? 'neg ' : 'bin ') . abs($number);
-	$exponent = ($power  < 0 ? 'neg ' : 'bin ') . abs($power);
-	return "op = op * op ^ $mantissa bin 2 $exponent"; // = number * 2^(power)
 }
 
 ?>
