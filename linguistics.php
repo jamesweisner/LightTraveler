@@ -54,7 +54,7 @@ $lines = array(
 		noun set
 		noun noun
 	',
-	'op > op # types bin 8',
+	'op > op # noun types bin 8',
 	'',
 	
 	// Define the different types of operators.
@@ -79,11 +79,12 @@ $lines = array(
 		noun &
 		noun |
 	',
-	'op = noun set_operators set 4
+	'op = noun set_operators set 5
 		noun #
 		noun U
 		noun I
 		noun C
+		noun R
 	',
 	'',
 	
@@ -96,7 +97,7 @@ $lines = array(
 		noun set_operators
 		set 1 noun type_of
 	',
-	'op > op # noun operators bin 20',
+	'op > op # noun operators bin 21',
 	'',
 	
 	// Define the set of all scalars.
@@ -124,7 +125,7 @@ $lines = array(
 	'',
 
 	// There can be no more than 65535 symbols in this language.
-	'op < op # symbols bin 65535',
+	'op < op # noun symbols bin 65535',
 	'',
 
 ); ?>

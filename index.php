@@ -75,6 +75,7 @@ foreach(preg_split('/\s+/', trim(join(' break ', $message))) as $token)
 {
 	if($token == 'break')
 	{
+		if($length % 2) die("Word misalignment!\n");
 		switch($mode)
 		{
 			case 3:  echo            "ffffffff"; break;
@@ -82,6 +83,7 @@ foreach(preg_split('/\s+/', trim(join(' break ', $message))) as $token)
 			case 5:  image_break();              break;
 			default: echo "\n";                  break;
 		}
+		$length += 2;
 		continue;
 	}
 	
@@ -103,6 +105,7 @@ foreach(preg_split('/\s+/', trim(join(' break ', $message))) as $token)
 		case 4: echo pack('n', $symbol);                              break;
 		case 5: image_symbol($symbol);                                break;
 	}
+	$length++;
 	
 	if($mode < 3) echo ' ';
 }

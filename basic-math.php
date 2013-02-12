@@ -197,24 +197,24 @@ $lines = array(
 	'op test op or scalar true  scalar undef scalar undef', // (t or i) is undef
 	
 	// Introduce logical not and intuitive leap to the concept of "defined".
-	'op test not scalar true  scalar false', // (not t) is false
-	'op test not scalar false scalar true',  // (not f) is true
-	'op test not scalar inf   scalar undef', // (not infinity) is undef
-	'op test not scalar undef scalar def',   // (not undef) is defined! holy shit!
-	'op test not scalar undef scalar def',   // Pay attention to this! Mind blown?
+	'op test op not scalar true  scalar false', // (not t) is false
+	'op test op not scalar false scalar true',  // (not f) is true
+	'op test op not scalar inf   scalar undef', // (not infinity) is undef
+	'op test op not scalar undef scalar def',   // (not undef) is defined! holy shit!
+	'op test op not scalar undef scalar def',   // Pay attention to this! Mind blown?
 	'',
 	
 	// Introduce exponents.
-	'op = op ^ bin 2 bin  0 bin 1',         // 2^0  = 1
-	'op = op ^ bin 2 bin  1 bin 2',         // 2^1  = 2
-	'op = op ^ bin 2 bin  2 bin 4',         // 2^2  = 4
-	'op = op ^ bin 2 bin  3 bin 8',         // 2^3  = 8
-	'op = op ^ bin 1 bin  3 bin 1',         // 1^3  = 1
-	'op = op ^ bin 3 bin  3 bin 27',        // 3^3  = 27
-	'op = op ^ bin 2 bin 15 bin 32768',     // 2^15 = 32768
-	'op = op ^ bin 0 bin  7 bin 0',         // 0^7  = 0
-	'op = op ^ bin 0 bin  0 bin 1',         // 0^0  = 1
-	'op < op ^ 65535 bin 65535 scalar inf', // 65535^65535 < inf
+	'op = op ^ bin 2 bin  0 bin 1',             // 2^0  = 1
+	'op = op ^ bin 2 bin  1 bin 2',             // 2^1  = 2
+	'op = op ^ bin 2 bin  2 bin 4',             // 2^2  = 4
+	'op = op ^ bin 2 bin  3 bin 8',             // 2^3  = 8
+	'op = op ^ bin 1 bin  3 bin 1',             // 1^3  = 1
+	'op = op ^ bin 3 bin  3 bin 27',            // 3^3  = 27
+	'op = op ^ bin 2 bin 15 bin 32768',         // 2^15 = 32768
+	'op = op ^ bin 0 bin  7 bin 0',             // 0^7  = 0
+	'op = op ^ bin 0 bin  0 bin 1',             // 0^0  = 1
+	'op < op ^ bin 65535 bin 65535 scalar inf', // 65535^65535 < inf
 
 	// Introduce complex numbers.
 	'op = op ^ bin 4 op / bin 1 bin 2 bin 2',    // 4^(1/2) = sqrt(4) = 2
